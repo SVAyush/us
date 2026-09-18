@@ -1,0 +1,567 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Us, In Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Karla:wght@300;400;600&family=Caveat:wght@600&display=swap">
+
+<style>
+  /* ============================================================
+     EDIT ME: names and letter live in the <script> at the bottom
+     ============================================================ */
+  :root{
+    --ground:#140D11;
+    --surface:#1E141A;
+    --ink:#F7ECEF;
+    --muted:#B6989F;
+    --faint:#7A646C;
+    --wine:#E24A6B;
+    --gold:#D9A94C;
+    --hair:rgba(247,236,239,.12);
+
+    --display:"Fraunces",Georgia,"Times New Roman",serif;
+    --body:"Karla","Helvetica Neue",Arial,sans-serif;
+    --hand:"Caveat","Segoe Script",cursive;
+
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  img{max-width:100%;display:block}
+
+  .wrap{
+    width:100%;
+    max-width:780px;
+    margin-inline:auto;
+    padding-inline:20px;
+  }
+
+  /* ---------------- letter ---------------- */
+
+  .letter{padding-block:64px 72px;position:relative}
+
+  .letter::after{
+    content:"";
+    position:absolute;
+    left:20px; right:20px; bottom:0;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--hair),transparent);
+  }
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 22px;
+  }
+
+  .hello{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(38px,11vw,62px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0 0 6px;
+    text-wrap:balance;
+  }
+
+  .hello em{
+    font-style:normal;
+    font-weight:700;
+    color:var(--wine);
+    display:block;
+  }
+
+  .letter-body{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+    color:var(--ink);
+    font-weight:300;
+    font-size:18.5px;
+    line-height:1.7;
+    max-width:min(46ch,100%);
+  }
+
+  .letter-body strong{font-weight:600;color:var(--wine)}
+
+  .sign{
+    margin-top:28px;
+    font-family:var(--hand);
+    font-size:27px;
+    line-height:1.2;
+    color:var(--gold);
+  }
+
+  .cue{
+    margin-top:46px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--faint);
+    background:none;
+    border:0;
+    padding:0;
+    font-family:var(--body);
+    cursor:pointer;
+  }
+
+  .cue:hover,.cue:focus-visible{color:var(--wine)}
+  .cue span{width:34px;height:1px;background:currentColor;display:inline-block}
+
+  /* ---------------- chapters ---------------- */
+
+  .chapter{padding-block:54px 10px}
+
+  .ch-num{
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--faint);
+    margin:0 0 8px;
+  }
+
+  .ch-title{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(26px,7vw,34px);
+    line-height:1.12;
+    margin:0 0 10px;
+    letter-spacing:-.015em;
+    text-wrap:balance;
+  }
+
+  .ch-note{
+    margin:0;
+    color:var(--muted);
+    font-weight:300;
+    font-size:17px;
+    max-width:min(44ch,100%);
+  }
+
+  /* ---------------- photos ---------------- */
+
+  .shots{
+    display:flex;
+    flex-direction:column;
+    gap:44px;
+    padding-block:32px 0;
+  }
+
+  figure{margin:0}
+
+  /* every photo runs full width and uncropped, nothing gets cut off */
+
+  .frame{
+    display:block;
+    width:100%;
+    padding:0;
+    border:0;
+    background:var(--surface);
+    border-radius:3px;
+    overflow:hidden;
+    cursor:zoom-in;
+    position:relative;
+    line-height:0;
+  }
+
+  .frame img{
+    width:100%;
+    height:auto;
+    transition:transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+
+  .frame:hover img{transform:scale(1.025)}
+  .frame:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+
+  figcaption{
+    margin-top:14px;
+    font-size:17px;
+    font-weight:300;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  /* a caption that's the point, not a footnote */
+  figcaption.loud{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:24px;
+    line-height:1.4;
+    color:var(--ink);
+    max-width:min(38ch,100%);
+  }
+
+  /* ---------------- the card + ending ---------------- */
+
+  .finale{padding-block:64px 30px;text-align:center}
+
+  .finale .frame{max-width:300px;margin-inline:auto}
+
+  .finale-words{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(23px,6.4vw,30px);
+    line-height:1.32;
+    margin:34px auto 0;
+    max-width:19ch;
+    text-wrap:balance;
+  }
+
+  .finale-words b{
+    font-weight:700;
+    color:var(--wine);
+    display:block;
+    margin-top:18px;
+  }
+
+  .end-sign{
+    margin-top:30px;
+    font-family:var(--hand);
+    font-size:25px;
+    color:var(--gold);
+  }
+
+  footer{
+    padding-block:46px 60px;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--faint);
+  }
+
+  /* ---------------- lightbox ---------------- */
+
+  #lb{
+    position:fixed;
+    inset:0;
+    background:rgba(10,6,8,.97);
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    padding-top:calc(16px + env(safe-area-inset-top,0px));
+  }
+
+  #lb img{max-width:100%;max-height:82vh;width:auto;border-radius:3px}
+
+  #lb figcaption{
+    position:absolute;
+    left:20px;right:20px;
+    bottom:calc(18px + env(safe-area-inset-bottom,0px));
+    text-align:center;
+    color:var(--muted);
+    font-size:14px;
+    margin:0;
+  }
+
+  #lbclose{
+    position:absolute;
+    top:calc(10px + env(safe-area-inset-top,0px));
+    right:12px;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1px solid var(--hair);
+    background:rgba(255,255,255,.04);
+    color:var(--ink);
+    font-size:21px;
+    line-height:1;
+    cursor:pointer;
+  }
+
+  /* ---------------- motion ---------------- */
+
+  .rise{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion:no-preference){
+    .js .rise{
+      opacity:0;
+      transform:translateY(16px);
+      transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1);
+    }
+    .js .rise.seen{opacity:1;transform:none}
+  }
+
+</style>
+
+<div class="wrap">
+
+  <section class="letter" id="top">
+    <p class="eyebrow">19 September</p>
+    <h1 class="hello">Happy birthday,<em id="herName">you</em></h1>
+    <div class="letter-body" id="letter"></div>
+    <p class="sign" id="signoff"></p>
+    <button class="cue" id="open"><span></span>Open it</button>
+  </section>
+
+  <main id="gallery"></main>
+
+  <section class="finale rise">
+    <button class="frame" data-src="site/us-2026-09-18-22-09-48.jpg" data-cap="You made this with your own hands. I'm not over it.">
+      <img src="site/us-2026-09-18-22-09-48.jpg" alt="A handmade card covered in hearts, lips and stickers, reading you are my favorite person and LOML" loading="lazy">
+    </button>
+    <p class="finale-words">That's everything so far. There's a lot of space left to fill.<b id="closer"></b></p>
+    <p class="end-sign" id="endsign"></p>
+  </section>
+
+  <footer>Made for you &middot; 19.09.2026</footer>
+</div>
+
+<script>
+/* ============================================================
+   1. EDIT THESE
+   ============================================================ */
+
+const HER = "Sakshi";     // her name
+const ME  = "Ayush";      // your name
+const PET = "";           // what you actually call her ("" to just use HER)
+
+const LETTER = [
+  `It's your birthday, so today the whole thing is about you, which, let's be honest, is how you like it anyway.`,
+  `I went back through our photos tonight to pick a few good ones. That was the plan. Then it was forty. Then it was eighty. Turns out we've been busy.`,
+  `Here's what I noticed going through them. You are <strong>ridiculously photogenic</strong> and it's honestly unfair. It doesn't matter where we are or what we're doing. You always look like you meant to be photographed, and I always look like I was told to stand there.`,
+  `So I made you this. Scroll slowly. It's all here.`
+];
+
+const SIGNOFF = ME;
+
+/* ============================================================
+   2. THE MEMORIES
+   ============================================================ */
+
+const CHAPTERS = [
+  {
+    kicker:"February 2026",
+    title:"Kala Ghoda",
+    note:"Where this properly started. Festival bunting, too many people, and neither of us looking at the art.",
+    shots:[
+      { src:"20260208-174855.jpg",
+        alt:"The two of us in front of Ador House at the Kala Ghoda festival",
+        cap:"You in the maroon dress, me pretending I came for the art installations. I did not come for the art installations.",
+        loud:true },
+      { src:"us-2026-09-18-22-09-48-1.jpg",
+        alt:"Selfie of us in the Kala Ghoda festival crowd with bunting overhead",
+        cap:"The crowd, the noise, and you." },
+      { src:"20260208-185532.jpg",
+        alt:"The sun setting over the sea at Marine Drive, the sky turning pink",
+        cap:"Marine Drive after. We sat and watched the whole thing go down, and neither of us said very much." }
+    ]
+  },
+  {
+    kicker:"28 March 2026 · Imagica",
+    title:"Khopoli, and a very long drive",
+    note:"All the way out on the expressway for one day of getting completely soaked. Worth it.",
+    shots:[
+      { src:"20260328-172423.jpg",
+        alt:"You standing with your back to the camera in front of a painted sea mural, hair wet, park wristband on",
+        cap:"A full day in the water and you still walked out of there looking like that. Genuinely unfair.",
+        loud:true }
+    ]
+  },
+  {
+    kicker:"29 March 2026 · Snow World",
+    title:"We found snow inside a mall",
+    note:"Seawoods, Navi Mumbai. Borrowed jackets, minus ten degrees, and one snowman with a better hat than either of us.",
+    shots:[
+      { pair:[
+        { src:"20260329-181405.jpg", alt:"Selfie of us inside the snow park", cap:"Two minutes in." },
+        { src:"20260329-183158.jpg", alt:"You alone in a red jacket standing in the snow", cap:"Minus ten, and still the warmest thing in there." }
+      ]},
+      { pair:[
+        { src:"20260329-183240.jpg", alt:"You beside a snowman wearing a top hat", cap:"He had a hat. You had sunglasses. Fair fight." },
+        { src:"20260329-183311.jpg", alt:"Selfie of us in the snow in our jackets", cap:"Frozen, laughing, fine." }
+      ]},
+      { pair:[
+        { src:"20260329-182817.jpg", alt:"The two of us standing beside the giant blue SNOW WORLD letters", cap:"Proof, in case anyone doubts that we found snow in Navi Mumbai." },
+        { src:"20260329-184504.jpg", alt:"Us together under blue lights in the snow park", cap:"The blue-light bit." }
+      ]}
+    ]
+  },
+  {
+    kicker:"30 March 2026",
+    title:"One mirror, one very patient wall",
+    note:"We took roughly forty photos in the same doorway that night. I picked three. You're welcome.",
+    shots:[
+      { pair:[
+        { src:"20260330-204317.jpg", alt:"Mirror selfie of us together by a door with hanging plants", cap:"Take one." },
+        { src:"20260330-204529.jpg", alt:"Mirror selfie, you holding the phone up", cap:"Take nineteen." }
+      ]},
+      { src:"20260330-204612.jpg",
+        alt:"Mirror selfie, you hugging me from behind and laughing",
+        cap:"And this one, which is why we took the other thirty-nine." },
+      { src:"20260330-232505.jpg",
+        alt:"You standing under the IMAX sign holding a red bucket of popcorn",
+        cap:"You said we would share the popcorn. That was the last full sentence you spoke before the trailers started.",
+        loud:true }
+    ]
+  },
+  {
+    kicker:"12 July 2026 · Paradox Museum",
+    title:"A building designed to confuse us",
+    note:"Mumbai. Every room in there is a trick, and you walked into all of them like you owned the place.",
+    shots:[
+      { src:"20260712-160041.jpg",
+        alt:"You sitting cross-legged inside an enormous pink bathtub illusion",
+        cap:"You got in without asking a single question.",
+        loud:true },
+      { src:"20260712-160516.jpg",
+        alt:"Mirror illusion showing three copies of you sitting around one table",
+        cap:"Three of you at one table, all ignoring me at exactly the same time. The museum understood something about my life." },
+      { pair:[
+        { src:"20260712-162629.jpg", alt:"You crouching against a bright blue wall with a rainbow shadow", cap:"The room that gives you a rainbow for a shadow." },
+        { src:"20260712-162636.jpg", alt:"You standing against the blue wall under the Paradox Museum Mumbai sign", cap:"\"Show the world your true colours,\" said the wall. You did. The wall lost." }
+      ]}
+    ]
+  },
+  {
+    kicker:"July 2026",
+    title:"The month we just kept going out",
+    note:"Cafés, a claw machine's worth of teddy bears, and an evening spent making clay avocados.",
+    shots:[
+      { pair:[
+        { src:"20260710-224329.jpg", alt:"Selfie of us in a café booth, you resting your chin on your hand", cap:"You do this thing with your chin." },
+        { src:"20260711-164509.jpg", alt:"Extreme close-up selfie of us both pulling faces", cap:"And then you do this." }
+      ]},
+      { pair:[
+        { src:"20260712-185549.jpg", alt:"Selfie of us at a Japanese restaurant called Kuuraku", cap:"Kuuraku. You ordered better than me. You always order better than me." },
+        { src:"20260712-201708.jpg", alt:"You sitting with a large teddy bear and a smaller stuffed toy", cap:"This is the face you make over a teddy bear. It is the entire reason I keep buying you things." }
+      ]},
+      { src:"screen-20260712-225345-instagram.jpg",
+        alt:"Screenshot of two clay avocados side by side captioned clay date with her",
+        cap:"Clay date. Mine came out looking like a potato. Yours looked like it belonged in a shop window." },
+      { src:"portrait-1792505894.jpg",
+        alt:"Portrait of you in a car, hair down, in a pink checked top",
+        cap:"No reason. No occasion. Just you. And I still can't look away.",
+        loud:true }
+    ]
+  },
+  {
+    kicker:"Right up to now",
+    title:"All the ordinary days",
+    note:"No occasion. No plan. These are somehow the ones I look at most.",
+    shots:[
+      { pair:[
+        { src:"us-2026-09-18-22-09-45.jpg", alt:"Selfie of us lying down together on a patterned floor", cap:"Floor, red polka dots, nothing to do." },
+        { src:"us-2026-09-18-22-09-46-1.jpg", alt:"Close selfie of us, you resting your face on your hand", cap:"That face again." }
+      ]},
+      { src:"us-2026-09-18-22-09-46.jpg",
+        alt:"Our hands held together, a white flower clip resting beside them",
+        cap:"This is my favourite photograph of us and neither of our faces is in it.",
+        loud:true },
+      { pair:[
+        { src:"us-2026-09-18-22-09-46-2.jpg", alt:"Selfie of us in cinema seats before a film starts", cap:"In our seats, trailers running, neither of us watching the screen." },
+        { src:"us-2026-09-18-22-09-46-3.jpg", alt:"Selfie of us outside the Nexus Seawoods mall entrance", cap:"Outside Seawoods again. The same mall that had snow in it, behaving like a normal mall this time." }
+      ]},
+      { src:"us-2026-09-18-22-09-47-1.jpg",
+        alt:"Selfie of us indoors, you in a red top",
+        cap:"Red suits you. Noted, and filed away for future birthdays." },
+      { pair:[
+        { src:"us-2026-09-18-22-09-49-2.jpg", alt:"Us holding a tray of food at a mall", cap:"You picked the order." },
+        { src:"us-2026-09-18-22-09-49.jpg", alt:"Night selfie of us outdoors, you in a maroon top", cap:"Late. Neither of us wanting to go home." }
+      ]},
+      { src:"us-2026-09-18-22-09-52-1.jpg",
+        alt:"You from behind holding a bucket of popcorn at the cinema",
+        cap:"Popcorn again. Some things don't change, and I hope they never do." }
+    ]
+  }
+];
+
+/* ============================================================
+   3. build it
+   ============================================================ */
+
+document.documentElement.classList.add("js");
+
+document.getElementById("herName").textContent = PET || HER;
+document.getElementById("signoff").textContent = SIGNOFF;
+document.getElementById("endsign").textContent = SIGNOFF;
+document.getElementById("closer").textContent = "Happy birthday, " + (PET || HER) + ".";
+
+document.getElementById("letter").innerHTML =
+  LETTER.map(p => `<p style="margin:0">${p}</p>`).join("");
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function figure(s, small){
+  const p = "site/" + s.src;
+  return `<figure>
+      <button class="frame" data-src="${esc(p)}" data-cap="${esc(s.cap)}">
+        <img src="${esc(p)}" alt="${esc(s.alt)}" loading="lazy">
+      </button>
+      <figcaption class="${s.loud && !small ? "loud" : ""}">${esc(s.cap)}</figcaption>
+    </figure>`;
+}
+
+document.getElementById("gallery").innerHTML = CHAPTERS.map(ch => `
+  <section class="chapter">
+    <p class="ch-num rise">${esc(ch.kicker)}</p>
+    <h2 class="ch-title rise">${esc(ch.title)}</h2>
+    <p class="ch-note rise">${esc(ch.note)}</p>
+    <div class="shots">
+      ${ch.shots
+          .flatMap(s => s.pair ? s.pair : [s])
+          .map(s => `<div class="rise">${figure(s, false)}</div>`)
+          .join("")}
+    </div>
+  </section>`).join("");
+
+/* reveal on scroll: starts visible if anything goes wrong */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("seen"); io.unobserve(e.target); }
+  });
+}, { rootMargin: "0px 0px -8% 0px" });
+
+document.querySelectorAll(".rise").forEach(el => io.observe(el));
+setTimeout(() => document.querySelectorAll(".rise:not(.seen)").forEach(el => {
+  if (el.getBoundingClientRect().top < innerHeight) el.classList.add("seen");
+}), 60);
+
+document.getElementById("open").addEventListener("click", () => {
+  document.querySelector(".chapter").scrollIntoView({
+    behavior: matchMedia("(prefers-reduced-motion:reduce)").matches ? "auto" : "smooth",
+    block: "start"
+  });
+});
+
+/* lightbox */
+let lb = null;
+function closeLb(){ if(lb){ lb.remove(); lb = null; document.body.style.overflow = ""; } }
+
+document.addEventListener("click", (ev) => {
+  const btn = ev.target.closest(".frame");
+  if(!btn) return;
+  closeLb();
+  lb = document.createElement("div");
+  lb.id = "lb";
+  lb.innerHTML = `<button id="lbclose" aria-label="Close">&times;</button>
+    <img src="${esc(btn.dataset.src)}" alt="">
+    <figcaption>${esc(btn.dataset.cap || "")}</figcaption>`;
+  lb.addEventListener("click", closeLb);
+  document.body.appendChild(lb);
+  document.body.style.overflow = "hidden";
+  lb.querySelector("#lbclose").focus();
+});
+
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeLb(); });
+</script>

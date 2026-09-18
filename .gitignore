@@ -1,0 +1,8 @@
+# only index.html and site/ are published; everything else stays local
+/Photos-1-001/
+/web/
+/thumbs/
+/build_thumbs.py
+/index.backup.html
+/*.jpeg
+/*.jpg
